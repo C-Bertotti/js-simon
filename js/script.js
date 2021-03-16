@@ -1,5 +1,8 @@
 // Un alert() espone 5 numeri generati casualmente.
-// 1. Creo una funzione che mi generi i numeri casuali
+// Da li parte un timer di 30 secondi.
+// Dopo 30 secondi l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
+// Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
+
 
 //Definisco le funzioni
 /** 
@@ -31,10 +34,28 @@ function inArray(array, elemento) {
     return false;
 }
 
+function yourNumber() {
+    var numeroInserito;
+    var numeriInseriti = [];
 
+    while ( numeriInseriti.length < 5 )  {
+        //...chiedo un numero
+        numeroInserito = parseInt(prompt('Inserisci uno dei numeri che hai visualizzato poco fa'));      ;
+        //verifico che non sia nell'array
+        if ( numeriInseriti.includes(numeroInserito) == false) {
+            //Lo inserisco nell'array
+            numeriInseriti.push(numeroInserito);
+        } else {
+            alert('Hai già inserito questo numero, riprova');
+        }
+    }
+
+}
+
+
+// 1. Creo un ciclo che mi generi i numeri casuali
 var numeroGenerato;
 var numeriGenerati = [];
-
 
 while ( numeriGenerati.length < 5 )  {
     //...genero un numero
@@ -49,7 +70,10 @@ while ( numeriGenerati.length < 5 )  {
 
 console.log(numeriGenerati);
 
+//2. Dopo i 30 secondi chiedo all'utente i 5 numeri, uno alla volta.
+setTimeout(yourNumber, 5000);
 
-// Da li parte un timer di 30 secondi.
-// Dopo 30 secondi l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
-// Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
+
+
+
+
