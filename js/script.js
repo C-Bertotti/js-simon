@@ -34,22 +34,47 @@ function inArray(array, elemento) {
     return false;
 }
 
-function yourNumber() {
-    var numeroInserito;
-    var numeriInseriti = [];
-
-    while ( numeriInseriti.length < 5 )  {
+/** 
+ * yourNumber - chiede per un tot di volte all'utente di inserire un numero, lo insrisce in un array e verifica che questo non sia stato ancora inserito
+ * 
+ * @param  {number} volteMax //inserire il numero di volte max che voglio chiedere all'utente;
+*/
+function yourNumber(dato, dati, volteMax) {
+   while ( dati.length < volteMax )  {
         //...chiedo un numero
-        numeroInserito = parseInt(prompt('Inserisci uno dei numeri che hai visualizzato poco fa'));      ;
+        dato = parseInt(prompt('Inserisci uno dei numeri che hai visualizzato poco fa'));      ;
         //verifico che non sia nell'array
-        if ( numeriInseriti.includes(numeroInserito) == false) {
+        if ( dati.includes(dato) == false) {
             //Lo inserisco nell'array
-            numeriInseriti.push(numeroInserito);
+            dati.push(dato);
         } else {
             alert('Hai già inserito questo numero, riprova');
         }
     }
+}
 
+/** 
+ * compareArray - mette a confronto due array di diversa lunghezza e trova gli elementi che sono uguali e li inserisce all'interno di un array.
+ * 
+ * @param  {var} array1 //nome dell'array dove vado a cercare 
+ * @param  {var} array2 //elemento da cercare all'interno dell'array
+ * @param  {var} array3 //array in cui verranno salvati i dati inseriti
+*/
+function compareArray(array1, array2, array3) {
+    for ( var y = 0; y < array1.length; y++ ) {
+        if ( (array2.includes(array1[y])) == true ) {
+            if ( (array3.includes(array1[y])) == false ) {
+                array3.push(array1[y]);
+            }
+        }
+    }
+    for ( var x = 0; x < array2.length; x++ ) {
+        if ( (array1.includes(array2[x])) == true ) {
+            if ( (array3.includes(array2[x])) == false ) {
+                array3.push(array2[x]);
+            }
+        }
+    }
 }
 
 
@@ -71,7 +96,19 @@ while ( numeriGenerati.length < 5 )  {
 console.log(numeriGenerati);
 
 //2. Dopo i 30 secondi chiedo all'utente i 5 numeri, uno alla volta.
-setTimeout(yourNumber, 5000);
+var numeroInserito;
+var numeriInseriti = [];
+var quanteVolte = 5;
+setTimeout(yourNumber, 5000, numeroInserito, numeriInseriti, quanteVolte);
+
+//3. Comparo i due array e verifico quanti numeri sono uguali e quanti diversi
+var numeriUguali = [];
+sameItems = compareArray(numeriGenerati, numeriInseriti, numeriUguali);
+
+console.log('I numeri che hai indovinato sono: ' + numeriUguali);
+console.log('Hai indovinato ' + numeriUguali.length + ' numeri');
+
+
 
 
 
